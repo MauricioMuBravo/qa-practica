@@ -1,0 +1,22 @@
+DROP DATABASE IF EXISTS iot;
+CREATE DATABASE iot;
+USE iot;
+
+CREATE TABLE lecturas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  medidor_id VARCHAR(20) NOT NULL,
+  ts DATETIME NOT NULL,
+  voltaje DECIMAL(6,2) NOT NULL,
+  corriente DECIMAL(6,2) NOT NULL,
+  kwh DECIMAL(10,3) NOT NULL,
+  recibido_en DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_medidor_ts (medidor_id, ts)
+);
+
+CREATE TABLE rechazadas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  topico VARCHAR(100),
+  payload TEXT,
+  motivo VARCHAR(200),
+  recibido_en DATETIME DEFAULT CURRENT_TIMESTAMP
+);
